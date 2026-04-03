@@ -180,7 +180,6 @@ export default function App() {
           </div>
         </div>
       </header>
-
       <main className="max-w-7xl mx-auto px-4 py-8 md:py-12">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           
@@ -270,7 +269,7 @@ export default function App() {
               </div>
             </section>
 
-            {mode === 'studio' ? (
+            {mode === 'studio' && (
               <section className="space-y-4">
                 <h2 className="text-sm font-semibold uppercase tracking-wider text-slate-500">2. Select Style</h2>
                 <div className="flex flex-wrap gap-3">
@@ -303,116 +302,9 @@ export default function App() {
                   Selected: <span className="text-indigo-600 font-bold">{selectedStyle.name}</span>
                 </p>
               </section>
-            ) : (
-              <>
-                <section className="space-y-4">
-                  <h2 className="text-sm font-semibold uppercase tracking-wider text-slate-500">2. Avatar Appearance</h2>
-                  <div className="space-y-4">
-                    <div className="grid grid-cols-2 gap-3">
-                      <button
-                        onClick={() => setGender('female')}
-                        className={`px-4 py-3 rounded-xl text-sm font-medium border transition-all duration-200 flex items-center justify-center gap-2
-                          ${gender === 'female' 
-                            ? 'bg-indigo-600 border-indigo-600 text-white shadow-lg shadow-indigo-200' 
-                            : 'bg-white border-slate-200 text-slate-600 hover:border-indigo-300 hover:bg-indigo-50/50'}`}
-                      >
-                        <User className="w-4 h-4" /> Female
-                      </button>
-                      <button
-                        onClick={() => setGender('male')}
-                        className={`px-4 py-3 rounded-xl text-sm font-medium border transition-all duration-200 flex items-center justify-center gap-2
-                          ${gender === 'male' 
-                            ? 'bg-indigo-600 border-indigo-600 text-white shadow-lg shadow-indigo-200' 
-                            : 'bg-white border-slate-200 text-slate-600 hover:border-indigo-300 hover:bg-indigo-50/50'}`}
-                      >
-                        <User className="w-4 h-4" /> Male
-                      </button>
-                    </div>
-
-                    <div className="space-y-2">
-                      <label className="text-xs font-bold text-slate-400 uppercase">Skin Tone</label>
-                      <div className="flex flex-wrap gap-2">
-                        {SKIN_TONES.map(tone => (
-                          <button
-                            key={tone}
-                            onClick={() => setSkinTone(tone)}
-                            className={`px-3 py-1.5 rounded-lg text-xs font-medium border transition-all
-                              ${skinTone === tone ? 'bg-indigo-600 border-indigo-600 text-white' : 'bg-white border-slate-200 text-slate-600 hover:border-indigo-200'}`}
-                          >
-                            {tone}
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-
-                    <div className="grid grid-cols-2 gap-4">
-                      <div className="space-y-2">
-                        <label className="text-xs font-bold text-slate-400 uppercase">Hair Color</label>
-                        <select 
-                          value={hairColor}
-                          onChange={(e) => setHairColor(e.target.value)}
-                          className="w-full p-2 rounded-lg border border-slate-200 text-sm bg-white focus:ring-2 focus:ring-indigo-500 outline-none"
-                        >
-                          {HAIR_COLORS.map(color => <option key={color} value={color}>{color}</option>)}
-                        </select>
-                      </div>
-                      <div className="space-y-2">
-                        <label className="text-xs font-bold text-slate-400 uppercase">Hairstyle</label>
-                        <select 
-                          value={hairstyle}
-                          onChange={(e) => setHairstyle(e.target.value)}
-                          className="w-full p-2 rounded-lg border border-slate-200 text-sm bg-white focus:ring-2 focus:ring-indigo-500 outline-none"
-                        >
-                          {HAIRSTYLES.map(style => <option key={style} value={style}>{style}</option>)}
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-                </section>
-
-                <section className="space-y-4">
-                  <h2 className="text-sm font-semibold uppercase tracking-wider text-slate-500">3. Scene Selector</h2>
-                  <div className="grid grid-cols-1 gap-2">
-                    {SCENES.map((scene) => (
-                      <button
-                        key={scene.id}
-                        onClick={() => setSelectedScene(scene)}
-                        className={`px-4 py-3 rounded-xl text-sm font-medium border transition-all duration-200 flex items-center gap-3
-                          ${selectedScene.id === scene.id 
-                            ? 'bg-indigo-600 border-indigo-600 text-white shadow-lg shadow-indigo-200' 
-                            : 'bg-white border-slate-200 text-slate-600 hover:border-indigo-300 hover:bg-indigo-50/50'}`}
-                      >
-                        <scene.icon className={`w-4 h-4 ${selectedScene.id === scene.id ? 'text-white' : 'text-slate-400'}`} />
-                        <span className="flex-1 text-left">{scene.name}</span>
-                        {selectedScene.id === scene.id && <Check className="w-4 h-4" />}
-                      </button>
-                    ))}
-                  </div>
-                </section>
-
-                <section className="space-y-4">
-                  <h2 className="text-sm font-semibold uppercase tracking-wider text-slate-500">4. Pose Selector</h2>
-                  <div className="grid grid-cols-1 gap-2">
-                    {POSES.map((pose) => (
-                      <button
-                        key={pose.id}
-                        onClick={() => setSelectedPose(pose)}
-                        className={`px-4 py-3 rounded-xl text-sm font-medium border transition-all duration-200 flex items-center gap-3
-                          ${selectedPose.id === pose.id 
-                            ? 'bg-indigo-600 border-indigo-600 text-white shadow-lg shadow-indigo-200' 
-                            : 'bg-white border-slate-200 text-slate-600 hover:border-indigo-300 hover:bg-indigo-50/50'}`}
-                      >
-                        <pose.icon className={`w-4 h-4 ${selectedPose.id === pose.id ? 'text-white' : 'text-slate-400'}`} />
-                        <span className="flex-1 text-left">{pose.name}</span>
-                        {selectedPose.id === pose.id && <Check className="w-4 h-4" />}
-                      </button>
-                    ))}
-                  </div>
-                </section>
-              </>
             )}
 
-            <button
+<button
               onClick={generatePhoto}
               disabled={!selectedImage || isGenerating}
               className={`w-full py-4 rounded-2xl font-bold text-lg flex items-center justify-center gap-2 transition-all duration-300 shadow-xl
@@ -440,8 +332,8 @@ export default function App() {
             )}
           </div>
 
-          {/* Right Column: Result */}
-          <div className="lg:col-span-8">
+          {/* Right Column: Result & Avatar Controls */}
+          <div className="lg:col-span-8 space-y-8">
             <div className="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden min-h-125 flex flex-col">
               <div className="p-4 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
                 <span className="text-sm font-medium text-slate-600">
@@ -519,6 +411,116 @@ export default function App() {
               </div>
             </div>
 
+            {/* Avatar Mode Columns */}
+            {mode === 'avatar' && (
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-4">
+                <section className="space-y-4">
+                  <h2 className="text-sm font-semibold uppercase tracking-wider text-slate-500">2. Avatar Appearance</h2>
+                  <div className="space-y-4">
+                    <div className="grid grid-cols-2 gap-3">
+                      <button
+                        onClick={() => setGender('female')}
+                        className={`px-4 py-3 rounded-xl text-sm font-medium border transition-all duration-200 flex items-center justify-center gap-2
+                          ${gender === 'female' 
+                            ? 'bg-indigo-600 border-indigo-600 text-white shadow-lg shadow-indigo-200' 
+                            : 'bg-white border-slate-200 text-slate-600 hover:border-indigo-300 hover:bg-indigo-50/50'}`}
+                      >
+                        <User className="w-4 h-4" /> Female
+                      </button>
+                      <button
+                        onClick={() => setGender('male')}
+                        className={`px-4 py-3 rounded-xl text-sm font-medium border transition-all duration-200 flex items-center justify-center gap-2
+                          ${gender === 'male' 
+                            ? 'bg-indigo-600 border-indigo-600 text-white shadow-lg shadow-indigo-200' 
+                            : 'bg-white border-slate-200 text-slate-600 hover:border-indigo-300 hover:bg-indigo-50/50'}`}
+                      >
+                        <User className="w-4 h-4" /> Male
+                      </button>
+                    </div>
+
+                    <div className="space-y-2">
+                      <label className="text-xs font-bold text-slate-400 uppercase">Skin Tone</label>
+                      <div className="flex flex-wrap gap-2">
+                        {SKIN_TONES.map(tone => (
+                          <button
+                            key={tone}
+                            onClick={() => setSkinTone(tone)}
+                            className={`px-3 py-1.5 rounded-lg text-xs font-medium border transition-all
+                              ${skinTone === tone ? 'bg-indigo-600 border-indigo-600 text-white' : 'bg-white border-slate-200 text-slate-600 hover:border-indigo-200'}`}
+                          >
+                            {tone}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 gap-4">
+                      <div className="space-y-2">
+                        <label className="text-xs font-bold text-slate-400 uppercase">Hair Color</label>
+                        <select 
+                          value={hairColor}
+                          onChange={(e) => setHairColor(e.target.value)}
+                          className="w-full p-2 rounded-lg border border-slate-200 text-sm bg-white focus:ring-2 focus:ring-indigo-500 outline-none"
+                        >
+                          {HAIR_COLORS.map(color => <option key={color} value={color}>{color}</option>)}
+                        </select>
+                      </div>
+                      <div className="space-y-2">
+                        <label className="text-xs font-bold text-slate-400 uppercase">Hairstyle</label>
+                        <select 
+                          value={hairstyle}
+                          onChange={(e) => setHairstyle(e.target.value)}
+                          className="w-full p-2 rounded-lg border border-slate-200 text-sm bg-white focus:ring-2 focus:ring-indigo-500 outline-none"
+                        >
+                          {HAIRSTYLES.map(style => <option key={style} value={style}>{style}</option>)}
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+
+                <section className="space-y-4">
+                  <h2 className="text-sm font-semibold uppercase tracking-wider text-slate-500">3. Scene Selector</h2>
+                  <div className="grid grid-cols-1 gap-2">
+                    {SCENES.map((scene) => (
+                      <button
+                        key={scene.id}
+                        onClick={() => setSelectedScene(scene)}
+                        className={`px-4 py-3 rounded-xl text-sm font-medium border transition-all duration-200 flex items-center gap-3
+                          ${selectedScene.id === scene.id 
+                            ? 'bg-indigo-600 border-indigo-600 text-white shadow-lg shadow-indigo-200' 
+                            : 'bg-white border-slate-200 text-slate-600 hover:border-indigo-300 hover:bg-indigo-50/50'}`}
+                      >
+                        <scene.icon className={`w-4 h-4 ${selectedScene.id === scene.id ? 'text-white' : 'text-slate-400'}`} />
+                        <span className="flex-1 text-left">{scene.name}</span>
+                        {selectedScene.id === scene.id && <Check className="w-4 h-4" />}
+                      </button>
+                    ))}
+                  </div>
+                </section>
+
+                <section className="space-y-4">
+                  <h2 className="text-sm font-semibold uppercase tracking-wider text-slate-500">4. Pose Selector</h2>
+                  <div className="grid grid-cols-1 gap-2">
+                    {POSES.map((pose) => (
+                      <button
+                        key={pose.id}
+                        onClick={() => setSelectedPose(pose)}
+                        className={`px-4 py-3 rounded-xl text-sm font-medium border transition-all duration-200 flex items-center gap-3
+                          ${selectedPose.id === pose.id 
+                            ? 'bg-indigo-600 border-indigo-600 text-white shadow-lg shadow-indigo-200' 
+                            : 'bg-white border-slate-200 text-slate-600 hover:border-indigo-300 hover:bg-indigo-50/50'}`}
+                      >
+                        <pose.icon className={`w-4 h-4 ${selectedPose.id === pose.id ? 'text-white' : 'text-slate-400'}`} />
+                        <span className="flex-1 text-left">{pose.name}</span>
+                        {selectedPose.id === pose.id && <Check className="w-4 h-4" />}
+                      </button>
+                    ))}
+                  </div>
+                </section>
+              </div>
+            )}
+
             {/* Tips/Info */}
             <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="p-4 rounded-2xl bg-white border border-slate-200">
@@ -543,7 +545,7 @@ export default function App() {
           </div>
         </div>
       </main>
-
+      
       <footer className="max-w-7xl mx-auto px-4 py-12 border-t border-slate-200 mt-12 text-center">
         <p className="text-sm text-slate-400">© 2026 Product Photo Studio. Powered by Gemini AI.</p>
       </footer>
