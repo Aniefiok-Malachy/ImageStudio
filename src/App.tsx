@@ -11,7 +11,6 @@ import { Upload, Image as ImageIcon, Sparkles, Loader2, Download, RefreshCw, Che
 // Initialize Gemini AI
 const ai = new GoogleGenAI({ 
   apiKey: import.meta.env.VITE_GEMINI_API_KEY || '' });
-  console.log("KEY:", import.meta.env.VITE_GEMINI_API_KEY);
 const STYLES = [
   { 
     id: 'white', 
